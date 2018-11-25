@@ -14,7 +14,7 @@ public class QueenBee extends BeeDecorator {
     }
     
     public String getAttribute() {
-        return tempBee.getAttribute() + ", +1 Baby Making, +1 Control, ";
+        return tempBee.getAttribute() + ", Baby Making, Control";
     }
 
 }
