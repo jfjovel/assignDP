@@ -3,10 +3,15 @@ package decorator;
 public class BeeMaker {
     
     public static void main(String[] args){
-       Bee baseBee = new Drone(new BasicBee()); 
+        Bee baseBee = new Drone(new BasicBee()); 
        
-       System.out.println(baseBee.getType());
-       System.out.println(baseBee.getAttribute());
+        System.out.println(baseBee.getType());
+        System.out.println(baseBee.getAttribute());
+        
+        Bee queen = new QueenBee(new Drone(new BasicBee()));
+        
+        System.out.println(queen.getType());
+        System.out.println(queen.getAttribute());
     }
 
     

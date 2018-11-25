@@ -1,6 +1,6 @@
 package decorator;
 
-public class BasicBee implements Bee{
+public class BasicBee implements Bee {
 
     @Override
     public String getType() {

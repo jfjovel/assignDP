@@ -1,8 +1,8 @@
 package decorator;
 
-public class Drone extends BeeDecorator{
+public class Drone extends BeeDecorator {
     
-    public Drone(Bee newBee){
+    public Drone(Bee newBee) {
         super(newBee);
     }
 
@@ -11,7 +11,7 @@ public class Drone extends BeeDecorator{
         return tempBee.getType() + ", Drone";
     }
     
-    public String getAttribute(){
+    public String getAttribute() {
         return tempBee.getAttribute() + "+1 Pollen Gathering";
     }
 
