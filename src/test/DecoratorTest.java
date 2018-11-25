@@ -4,7 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import decorator.BasicBee;
 import decorator.Bee;
-import decorator.BeeDecorator;
 import decorator.HoneyBee;
 import decorator.KillerBee;
 import decorator.QueenBee;
