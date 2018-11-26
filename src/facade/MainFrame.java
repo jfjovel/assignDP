@@ -9,16 +9,14 @@ import builder.KillerBuilder;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
-import javax.swing.border.Border;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -30,19 +28,18 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.Border;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
-
 
 import singleton.Apiary;
 
 public class MainFrame extends JFrame {
 
-    private final DefaultListModel<Hive> ApiaryHives = new DefaultListModel<Hive>();
+    private final DefaultListModel<Hive> apiaryHivesModel = new DefaultListModel<Hive>();
 
-    JList<Hive> apiaryHives = new JList<Hive>(ApiaryHives);
+    JList<Hive> apiaryHives = new JList<Hive>(apiaryHivesModel);
 
 
     JLabel apiaryName = new JLabel();
@@ -87,6 +84,20 @@ public class MainFrame extends JFrame {
 
     Border border = BorderFactory.createLineBorder(Color.DARK_GRAY, 1);
 
+    private void writeObject(ObjectOutputStream out)
+            throws IOException {
+        out.defaultWriteObject();
+    }
+    
+    private void readObject(java.io.ObjectInputStream in)
+            throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+    }
+
+    /**
+     * Constructor method for the MainFrame class that brings forward the working
+     * panel.
+     */
     public MainFrame() {
         super("The BeesKnees Apiary");
         try {
@@ -96,22 +107,25 @@ public class MainFrame extends JFrame {
         }
     }
 
-
-
+    /**
+     * Method called from the constructor that creates all the frames and calls
+     * to create the listeners as well.
+     * @return JFrame that is used as the interface for the user.
+     */
     public JFrame createAllPanels() {
 
         masterPanel.setLayout(new BorderLayout());
-        GroupLayout layout = new GroupLayout(allPanels);
-        allPanels.setLayout(layout);
-        
+//        GroupLayout layout = new GroupLayout(allPanels);
+//        allPanels.setLayout(layout);
+
         messageLabel.setFont(new Font("Serif", Font.BOLD, 20));
         messageLabel.setHorizontalAlignment(JLabel.CENTER);
         messageLabel.setVerticalAlignment(JLabel.CENTER);
-        
+
         specialMessage.setFont(new Font("Serif", Font.BOLD, 20));
         specialMessage.setHorizontalAlignment(JLabel.CENTER);
         specialMessage.setVerticalAlignment(JLabel.CENTER);
-        
+
 
 
 
@@ -125,19 +139,25 @@ public class MainFrame extends JFrame {
         hivePanel.setLayout(new GridLayout(5, 1));
 
         hiveQueen.setVisible(true);
+        hiveQueen.setEditable(false);
         hiveQueen.setLineWrap(true);
         hiveQueen.setBorder(border);
 
         hiveAttribute.setVisible(true);
+        hiveAttribute.setEditable(false);
+        hiveAttribute.setLineWrap(true);
         hiveAttribute.setBorder(border);
 
         hiveType.setVisible(true);
+        hiveType.setEditable(false);
         hiveType.setBorder(border);
 
         hiveRooms.setVisible(true);
+        hiveRooms.setEditable(false);
         hiveRooms.setBorder(border);
 
         hiveWorkers.setVisible(true);
+        hiveWorkers.setEditable(false);
         hiveWorkers.setBorder(border);
 
 
@@ -159,24 +179,24 @@ public class MainFrame extends JFrame {
 
 
 
-        layout.setAutoCreateGaps(true);
-        layout.setAutoCreateContainerGaps(true);
-
-        GroupLayout.SequentialGroup horGroup = layout.createSequentialGroup();
-
-        horGroup.addGroup(layout.createParallelGroup().addComponent(hiveScroll));
-        horGroup.addGroup(layout.createParallelGroup().addComponent(hivePanel));
-        horGroup.addGroup(layout.createParallelGroup().addComponent(beePanel));
-
-        layout.setHorizontalGroup(horGroup);
-
-        GroupLayout.SequentialGroup vertGroup = layout.createSequentialGroup();
-
-        vertGroup.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-                .addComponent(hiveScroll).addComponent(hivePanel)
-                .addComponent(beePanel));
-
-        layout.setVerticalGroup(vertGroup);
+//        layout.setAutoCreateGaps(true);
+//        layout.setAutoCreateContainerGaps(true);
+//
+//        GroupLayout.SequentialGroup horGroup = layout.createSequentialGroup();
+//
+//        horGroup.addGroup(layout.createParallelGroup().addComponent(hiveScroll));
+//        horGroup.addGroup(layout.createParallelGroup().addComponent(hivePanel));
+//        horGroup.addGroup(layout.createParallelGroup().addComponent(beePanel));
+//
+//        layout.setHorizontalGroup(horGroup);
+//
+//        GroupLayout.SequentialGroup vertGroup = layout.createSequentialGroup();
+//
+//        vertGroup.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+//                .addComponent(hiveScroll).addComponent(hivePanel)
+//                .addComponent(beePanel));
+//
+//        layout.setVerticalGroup(vertGroup);
 
         masterPanel.add(messageLabel, BorderLayout.NORTH);
         masterPanel.add(hivePanel, BorderLayout.CENTER);
@@ -206,7 +226,7 @@ public class MainFrame extends JFrame {
                         hiveDir.makeHive();
                         Hive honeyHive = hiveDir.getHive();
                         beeHome.addHive(honeyHive);
-                        ApiaryHives.addElement(honeyHive);
+                        apiaryHivesModel.addElement(honeyHive);
                         messageLabel.setText("New Honey Bee Hive created and"
                                 + " added to your Apiary");
                         specialMessage.setText(beeHome.toString());
@@ -224,13 +244,13 @@ public class MainFrame extends JFrame {
                         hiveDir.makeHive();
                         Hive killerHive = hiveDir.getHive();
                         beeHome.addHive(killerHive);
-                        ApiaryHives.addElement(killerHive);
+                        apiaryHivesModel.addElement(killerHive);
                         messageLabel.setText("New Killer Bee Hive created and"
                                 + " added to your Apiary");
                         specialMessage.setText("<html><br>" + beeHome.toString() 
-                                + "\n \' The killer Queen has diamond eyes"
-                                + " with laser beams, guaranteed to blow your"
-                                + " minds\' --Freddie Mercury</br></html>");
+                            + "\n \' The killer Queen has diamond eyes"
+                            + " with laser beams, guaranteed to blow your"
+                            + " minds\' --Freddie Mercury</br></html>");
 
                     }
 
@@ -245,7 +265,7 @@ public class MainFrame extends JFrame {
                         hiveDir.makeHive();
                         Hive basicHive = hiveDir.getHive();
                         beeHome.addHive(basicHive);
-                        ApiaryHives.addElement(basicHive);
+                        apiaryHivesModel.addElement(basicHive);
                         messageLabel.setText("New Basic Bee Hive created and"
                                 + " added to your Apiary");
                         specialMessage.setText(beeHome.toString());
@@ -277,12 +297,12 @@ public class MainFrame extends JFrame {
                         hiveRooms.setText(Integer.toString(temp.getRooms()));
                         hiveWorkers.setText(Integer.toString(temp.getWorkers().size()));
                         messageLabel.setText(temp.toString());
-                        if(temp.beeAttribute.contains("Killer")) {
+                        if (temp.beeAttribute.contains("Killer")) {
                             specialMessage.setText("\n \' The killer Queen has diamond eyes"
-                                + " with laser beams, guaranteed to blow your"
-                                + " minds\' --Freddie Mercury</br></html>");
+                                    + " with laser beams, guaranteed to blow your"
+                                    + " minds\' --Freddie Mercury</br></html>");
                         }
-                        
+
 
                     }
 

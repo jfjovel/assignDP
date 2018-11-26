@@ -42,12 +42,16 @@ public class Apiary {
         return hives;
     }
     
+    /**
+     * Method is used to add a new hive to the apiary.
+     * @param newHive that is passed into it
+     */
     public void addHive(Hive newHive) {
         hives.add(newHive);        
     }
     
     @Override 
-    public String toString(){
+    public String toString() {
         String message  = "This apiary is instance " 
                 + System.identityHashCode(onlyInstance) 
                 + " and has " + hives.size() + " hive(s)!";

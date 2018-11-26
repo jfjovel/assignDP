@@ -6,12 +6,13 @@ import decorator.HoneyBee;
 import decorator.KillerBee;
 import decorator.QueenBee;
 import facade.MainFrame;
-import singleton.Apiary;
 
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
+import singleton.Apiary;
+
+
 
 
 
@@ -60,7 +61,7 @@ public class Main {
 
         System.out.println(killer.toString());
         ArrayList<Bee> bees = new ArrayList<Bee>();
-        for(int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++) {
             bees.add(killer);
         }
         System.out.println(bees.toString());
