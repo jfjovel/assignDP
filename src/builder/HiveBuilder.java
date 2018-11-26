@@ -1,6 +1,15 @@
 package builder;
 
 public abstract class HiveBuilder {
+    protected Hive hive;
+    
+    public Hive getHive(){
+        return hive;
+    }
+    
+    public void createNewHive() {
+        hive = new Hive();
+    }
 
     public abstract void beeType();
 
@@ -12,7 +21,7 @@ public abstract class HiveBuilder {
 
     public abstract void rooms();
 
-    public abstract Hive build();
+    //public abstract Hive build();
 
 
 

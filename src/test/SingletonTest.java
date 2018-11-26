@@ -2,6 +2,10 @@ package test;
 
 import static org.junit.Assert.assertTrue;
 
+import builder.Hive;
+import builder.HiveBuilder;
+import builder.HiveDirector;
+import builder.KillerBuilder;
 import org.junit.Test;
 import singleton.Apiary;
 
@@ -21,6 +25,19 @@ public class SingletonTest {
         int hashCode2 = System.identityHashCode(secondOne);
         
         assertTrue(hashCode == hashCode2);
+        
+        //Initiate Hive Director to build the hives
+        HiveDirector hd = new HiveDirector();
+        
+        //First hive Builder tested will be for killer Bees
+        HiveBuilder killerBuilder = new KillerBuilder();
+        hd.setBuilder(killerBuilder);
+        hd.makeHive();
+        Hive killerHive = hd.getHive();
+        
+        firstOne.addHive(killerHive);
+        
+        assertTrue(firstOne.getHives().size() == 1);
         
         
         

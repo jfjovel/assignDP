@@ -7,7 +7,7 @@ public abstract class BeeDecorator implements Bee {
         tempBee = newBee;
     }
     
-    public String getDescription() {
+    public String getType() {
         return tempBee.getType();
     }
 

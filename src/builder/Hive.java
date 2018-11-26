@@ -48,18 +48,21 @@ public class Hive {
      */
     public void addRoom() {
         rooms += 1;
-        Bee temp;
         if (beeType.equalsIgnoreCase(KILLTYPE)) {
-            temp = new KillerBee(new BasicBee());
+            for (int i = 0; i < 10; i++) {
+                workers.add(new KillerBee(new BasicBee()));
+            }
             
         } else if (beeType.equalsIgnoreCase(HONEYTYPE)) {
-            temp = new HoneyBee(new BasicBee());
+            for (int i = 0; i < 10; i++) {
+                workers.add(new HoneyBee(new BasicBee()));
+            }
         } else {
-            temp = new BasicBee();
+            for (int i = 0; i < 10; i++) {
+                workers.add(new BasicBee());
+            }
         }
-        for (int i = 0; i < 10; i++) {
-            workers.add(temp);
-        }
+
     }
     
     /**
