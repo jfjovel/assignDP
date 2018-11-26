@@ -39,6 +39,10 @@ public class SingletonTest {
         
         assertTrue(firstOne.getHives().size() == 1);
         
+        String apiaryStats = "This apiary is instance " 
+                + hashCode+ " and has 1 hive(s)!";
+        assertTrue(firstOne.toString().equalsIgnoreCase(apiaryStats));
+        
         
         
     }
