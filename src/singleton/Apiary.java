@@ -1,8 +1,9 @@
 package singleton;
 
+import builder.Hive;
+
 import java.util.ArrayList;
 
-import builder.Hive;
 
 /**
  * The class is a singleton type class that only instantiates
@@ -15,7 +16,11 @@ public class Apiary {
     private static Apiary onlyInstance = null;
     private ArrayList<Hive> hives;
     
-    private Apiary(){
+    /**
+     * Private call for the constructor so that only a single 
+     * instance can be made and used.
+     */
+    private Apiary() {
         hives = new ArrayList<Hive>();
     }
     
@@ -33,7 +38,7 @@ public class Apiary {
         return onlyInstance;
     }
     
-    public ArrayList<Hive> getHives(){
+    public ArrayList<Hive> getHives() {
         return hives;
     }
     

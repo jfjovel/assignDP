@@ -4,7 +4,7 @@ import decorator.BasicBee;
 import decorator.Bee;
 import decorator.QueenBee;
 
-public class BasicBuilder extends HiveBuilder{
+public class BasicBuilder extends HiveBuilder {
 
     private Hive basicHive = new Hive();
     private Bee basicQueen = new QueenBee(new BasicBee());

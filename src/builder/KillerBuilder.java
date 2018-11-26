@@ -5,7 +5,7 @@ import decorator.Bee;
 import decorator.KillerBee;
 import decorator.QueenBee;
 
-public class KillerBuilder extends HiveBuilder{
+public class KillerBuilder extends HiveBuilder {
     
     private Hive killerHive = new Hive();
     private Bee killerQueen = new QueenBee(new KillerBee(new BasicBee()));
@@ -31,7 +31,7 @@ public class KillerBuilder extends HiveBuilder{
 
     @Override
     public void workers() {
-        for (int i = 0; i < 150 ; i++){
+        for (int i = 0; i < 150; i++) {
             killerHive.workers.add(killerBees);
         }
         

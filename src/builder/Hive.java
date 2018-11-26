@@ -1,15 +1,17 @@
 package builder;
 
-import java.util.ArrayList;
-
 import decorator.BasicBee;
 import decorator.Bee;
 import decorator.HoneyBee;
 import decorator.KillerBee;
 
+import java.util.ArrayList;
+
+
+
 public class Hive {
-    private final String KILLTYPE = "Basic Drone Bee, Killer Bee";
-    private final String HONEYTYPE = "Basic Drone Bee, Honey Bee";
+    private static final String KILLTYPE = "Basic Drone Bee, Killer Bee";
+    private static final String HONEYTYPE = "Basic Drone Bee, Honey Bee";
     
     public String beeType;
     public String beeAttribute;
@@ -18,42 +20,33 @@ public class Hive {
     public int rooms;
     
 
-    /**
-     * @return the beeType
-     */
+
     public String getBeeType() {
         return beeType;
     }
 
-    /**
-     * @return the beeAttribute
-     */
     public String getBeeAttribute() {
         return beeAttribute;
     }
 
-    /**
-     * @return the queen
-     */
     public Bee getQueen() {
         return queen;
     }
 
-    /**
-     * @return the workers
-     */
     public ArrayList<Bee> getWorkers() {
         return workers;
     }
 
-    /**
-     * @return the rooms
-     */
     public int getRooms() {
         return rooms;
     }
     
-    public void addRoom(){
+    /**
+     * Method is used to add a room to a beehive.  When a room 
+     * is added the method asks what kind of type the beehive is
+     * and then adds 10 of that type of bee per room.
+     */
+    public void addRoom() {
         rooms += 1;
         Bee temp;
         if (beeType.equalsIgnoreCase(KILLTYPE)) {
@@ -64,12 +57,15 @@ public class Hive {
         } else {
             temp = new BasicBee();
         }
-        for (int i = 0; i<10; i++) {
+        for (int i = 0; i < 10; i++) {
             workers.add(temp);
         }
     }
     
-    public void killBee(){
+    /**
+     * Method is used to remove a bee from the hive when it is killed.
+     */
+    public void killBee() {
         workers.remove(workers.size() - 1);
     }
     

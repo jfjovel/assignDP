@@ -1,12 +1,11 @@
 package builder;
-import java.util.ArrayList;
 
 import decorator.BasicBee;
 import decorator.Bee;
 import decorator.HoneyBee;
 import decorator.QueenBee;
 
-public class HoneyBuilder extends HiveBuilder{
+public class HoneyBuilder extends HiveBuilder {
 
     private Hive honeyHive = new Hive();
     private Bee honeyQueen = new QueenBee(new HoneyBee(new BasicBee()));
@@ -32,7 +31,7 @@ public class HoneyBuilder extends HiveBuilder{
 
     @Override
     public void workers() {
-        for (int i = 0; i < 350 ; i++){
+        for (int i = 0; i < 350; i++) {
             honeyHive.workers.add(honeyBees);
         }
     }
@@ -51,5 +50,3 @@ public class HoneyBuilder extends HiveBuilder{
 
 }
 
-
-}

@@ -1,13 +1,6 @@
 package builder;
 
-import decorator.Bee;
-
 public abstract class HiveBuilder {
-//    public String beeType;
-//    public String beeAttribute;
-//    public Bee queen;
-//    public Bee[] workers;
-//    public int rooms;
 
     public abstract void beeType();
 
