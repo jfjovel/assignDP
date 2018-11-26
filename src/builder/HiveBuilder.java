@@ -3,7 +3,7 @@ package builder;
 public abstract class HiveBuilder {
     protected Hive hive;
     
-    public Hive getHive(){
+    public Hive getHive() {
         return hive;
     }
     
