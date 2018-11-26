@@ -15,11 +15,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -55,7 +54,7 @@ public class MainFrame extends JFrame {
     JPanel response = new JPanel();
 
     Apiary beeHome = Apiary.getInstance();
-    Hive[] allHives;
+    ArrayList<Hive> allHives;
 
     JButton addRoom = new JButton("Add Hive to Apiary");
     JButton newHoney = new JButton("Create new Honey Bee Hive");
@@ -115,8 +114,6 @@ public class MainFrame extends JFrame {
     public JFrame createAllPanels() {
 
         masterPanel.setLayout(new BorderLayout());
-//        GroupLayout layout = new GroupLayout(allPanels);
-//        allPanels.setLayout(layout);
 
         messageLabel.setFont(new Font("Serif", Font.BOLD, 20));
         messageLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -127,14 +124,15 @@ public class MainFrame extends JFrame {
         specialMessage.setVerticalAlignment(JLabel.CENTER);
 
 
-
-
         createListeners();
         //apiaryName.setText(beeHome.toString());
         apiaryHives.setVisibleRowCount(10);
         apiaryHives.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        allHives = beeHome.getHives();
+        for (Hive hive: allHives) {
+            apiaryHivesModel.addElement(hive);
+        }
         hiveScroll = new JScrollPane(apiaryHives);
-        //specialMessage.setText(beeHome.toString());
 
         hivePanel.setLayout(new GridLayout(5, 1));
 
@@ -160,7 +158,6 @@ public class MainFrame extends JFrame {
         hiveWorkers.setEditable(false);
         hiveWorkers.setBorder(border);
 
-
         hivePanel.add(queenLabel);
         hivePanel.add(hiveQueen);
         hivePanel.add(attributeLabel);
@@ -177,26 +174,6 @@ public class MainFrame extends JFrame {
         beePanel.add(newHoney);
         beePanel.add(newKiller);
 
-
-
-//        layout.setAutoCreateGaps(true);
-//        layout.setAutoCreateContainerGaps(true);
-//
-//        GroupLayout.SequentialGroup horGroup = layout.createSequentialGroup();
-//
-//        horGroup.addGroup(layout.createParallelGroup().addComponent(hiveScroll));
-//        horGroup.addGroup(layout.createParallelGroup().addComponent(hivePanel));
-//        horGroup.addGroup(layout.createParallelGroup().addComponent(beePanel));
-//
-//        layout.setHorizontalGroup(horGroup);
-//
-//        GroupLayout.SequentialGroup vertGroup = layout.createSequentialGroup();
-//
-//        vertGroup.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-//                .addComponent(hiveScroll).addComponent(hivePanel)
-//                .addComponent(beePanel));
-//
-//        layout.setVerticalGroup(vertGroup);
 
         masterPanel.add(messageLabel, BorderLayout.NORTH);
         masterPanel.add(hivePanel, BorderLayout.CENTER);
@@ -275,18 +252,6 @@ public class MainFrame extends JFrame {
                 }
         );
 
-        getInfo.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        Hive temp = (Hive) apiaryHives.getSelectedValue();
-                        hiveQueen.setText(temp.getQueen().getAttribute());
-                        hiveAttribute.setText(temp.getBeeAttribute());
-                        hiveType.setText(temp.getBeeType());
-                        hiveRooms.setText(Integer.toString(temp.getRooms()));
-                        hiveWorkers.setText(Integer.toString(temp.getWorkers().size()));
-                    }
-                }
-        );
         apiaryHives.addListSelectionListener(
                 new ListSelectionListener() {
                     public void valueChanged(ListSelectionEvent e) {
