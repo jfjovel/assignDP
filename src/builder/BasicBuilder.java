@@ -1,5 +1,4 @@
 package builder;
-import java.util.ArrayList;
 
 import decorator.BasicBee;
 import decorator.Bee;
@@ -31,7 +30,7 @@ public class BasicBuilder extends HiveBuilder{
 
     @Override
     public void workers() {
-        for (int i = 0; i < 1000 ; i++){
+        for (int i = 0; i < 1000; i++) {
             basicHive.workers.add(basicBees);
         }
     }
@@ -50,6 +49,4 @@ public class BasicBuilder extends HiveBuilder{
 
 }
 
-
-}
 
