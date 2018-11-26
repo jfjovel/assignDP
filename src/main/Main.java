@@ -1,5 +1,10 @@
 package main;
 
+import builder.Hive;
+import builder.HiveBuilder;
+import builder.HiveDirector;
+import builder.HoneyBuilder;
+import builder.KillerBuilder;
 import decorator.BasicBee;
 import decorator.Bee;
 import decorator.HoneyBee;
@@ -7,15 +12,8 @@ import decorator.KillerBee;
 import decorator.QueenBee;
 import facade.MainFrame;
 
-import java.util.ArrayList;
-
 import javax.swing.JFrame;
 
-import builder.Hive;
-import builder.HiveBuilder;
-import builder.HiveDirector;
-import builder.HoneyBuilder;
-import builder.KillerBuilder;
 import singleton.Apiary;
 
 
