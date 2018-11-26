@@ -14,6 +14,13 @@ apply plugin: 'java'
 
 mainClassName = 'main.Main'
 
+jar{
+	baseName = 'assignDp.jjovel1'
+	manifest {
+				attributes 'Main-Class': 'main.Main'
+	}
+}
+
 sourceSets 	{
 	main{
 		java{
