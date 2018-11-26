@@ -45,4 +45,12 @@ public class Apiary {
     public void addHive(Hive newHive) {
         hives.add(newHive);        
     }
+    
+    @Override 
+    public String toString(){
+        String message  = "This apiary is instance " 
+                + System.identityHashCode(onlyInstance) 
+                + " and has " + hives.size() + " hive(s)!";
+        return message;
+    }
 }

@@ -72,4 +72,23 @@ public class Hive {
         workers.remove(workers.size() - 1);
     }
     
+    /**
+     * Method is used to add a room to a beehive.  When a room 
+     * is added the method asks what kind of type the beehive is
+     * and then adds 10 of that type of bee per room.
+     */
+    public String toString() {
+        String hiveMess;
+        if (beeType.equalsIgnoreCase(KILLTYPE)) {
+            hiveMess = "Killer Bee Hive";
+            
+        } else if (beeType.equalsIgnoreCase(HONEYTYPE)) {
+            hiveMess = "Honey Bee Hive";
+        } else {
+            hiveMess = "Basic Bee Hive";
+        }
+        return hiveMess;
+
+    }
+    
 }
